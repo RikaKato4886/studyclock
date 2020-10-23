@@ -99,24 +99,25 @@ function timer(){
       };  //一桁の時はゼロをたす
 
       //------------時間ごとに画像とメッセージを変更する-----------//
+      const caseTime = selectedTime(); //変数に選択された数字をいれる
 
       switch (time) {
         case 1:  //最初に変える
           changeImage();
           break;
-        case selectedTime(): //5min-300sec 10min-600sec 15min-900sec(15分)
+        case caseTime: //5min-300sec 10min-600sec 15min-900sec(15分)
           changeImage();
           break;
-        case selectedTime()*2: //10min-600sec(10分) 20min-1200sec(20分), 30min-1800(30min)
+        case caseTime*2: //10min-600sec(10分) 20min-1200sec(20分), 30min-1800(30min)
           changeImage();
           break;
-        case selectedTime()*3: //15min-900sec 30min-1800sec, 45min-2700sec(45分)
+        case caseTime*3: //15min-900sec 30min-1800sec, 45min-2700sec(45分)
           changeImage();
           break;
-        case selectedTime()*4: //20min-1200sec 40min-2400sec,
+        case caseTime*4: //20min-1200sec 40min-2400sec,
         changeImage();
         break;
-        case selectedTime()*5: //25min-1500sec
+        case caseTime*5: //25min-1500sec
         changeImage();
         break;
       }
