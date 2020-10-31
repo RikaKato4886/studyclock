@@ -1,6 +1,9 @@
+import _ from 'lodash';
+
 let status = 0; // 0:停止中で 1:動作中
 let time = 0;
 
+//-------Event --------//
 const startBtn = document.getElementById("startBtn");
 startBtn.addEventListener('click', start);
 const stopBtn = document.getElementById("stopBtn")
@@ -12,13 +15,12 @@ const img = document.querySelector('.photo');
 const message = document.querySelector('.message');
 
 //-------0. Timer Setting by User 何分毎に変更するか決めてもらう --------//
-
 const selectTimeBtn = document.getElementById('selectMinBtn')
 const minSetting = document.getElementById('minsetting-container')
 
 function selectedTime(){ //選択してもらう
-const input = document.getElementById('selectMin').value //ユーザーの指定番号5 or 10 or 15
-  return input*60; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
+  const input = document.getElementById('selectMin').value //ユーザーの指定番号5 or 10 or 15
+  return input*5; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
 }
 
 function showTimer(){ //選択した後、タイマーを表示して選択肢を消す
@@ -32,14 +34,14 @@ selectTimeBtn.addEventListener('click', showTimer);
 
 //---------------1. Show CurrentTime 現在時刻の表示-----------------//
 
-function realtime() {
+function currentTime() {
   //moment.jsを使いたい 現在時刻の表示
   setInterval(() => {
     let time = moment().format('h:mm:ss a');
     document.getElementById('currentTime').innerHTML = time;
   }, 1000)
 }
-realtime();
+currentTime();
 
 //----------2. Controll Button コントロールボタンの設定------------//
 
@@ -99,7 +101,8 @@ function timer(){
       };  //一桁の時はゼロをたす
 
       //------------時間ごとに画像とメッセージを変更する-----------//
-      const caseTime = selectedTime(); //変数に選択された数字をいれる
+      const caseTime = selectedTime();
+      //変数にユーザーから選択された数字(5 or 10 or 15)をいれる
 
       switch (time) {
         case 1:  //最初に変える
@@ -134,10 +137,12 @@ function timer(){
 //--------------------------4. 画像とメッセージをランダムに変更する-----------------------//
 
 function changeImage(){ //数分ごとにimageを変える
-  const randomNum = Math.floor(Math.random() * 4) + 1; //1から4をランダムに表示
+  const randomNum = _.random(1, 4); //1から4をランダムに表示
+  console.log(randomNum)
   img.src = `src/photo/photo-${randomNum}.jpg`
   message.src = `src/message/message-${randomNum}.png`
 }
+
 
 //1. 現在時刻の表示 - done
 //2. startボタンをクリックしてからの経過時間を表示 - done
