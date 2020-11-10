@@ -1,4 +1,3 @@
-import _ from 'lodash';
 
 let status = 0; // 0:停止中で 1:動作中
 let time = 0;
@@ -138,7 +137,6 @@ function timer(){
 
 function changeImage(){ //数分ごとにimageを変える
   const randomNum = _.random(1, 4); //1から4をランダムに表示
-  console.log(randomNum)
   img.src = `src/photo/photo-${randomNum}.jpg`
   message.src = `src/message/message-${randomNum}.png`
 }
