@@ -82,7 +82,7 @@ let sec;
 
 function timer(){
     // ステータスが動作中の場合のみ実行
-  if (status == 1) {
+  if (status == 1) {// 基本、厳密等価演算子が良いです。等価演算子は値の型まで見ないので挙動が起こりやすいです
     setTimeout(() => {
       time++;
       console.log(time)
@@ -90,7 +90,7 @@ function timer(){
       min = Math.floor(time/60);
       sec = Math.floor(time);
 
-      if (min < 10) {
+      if (min < 10) {// この10はどういう意味を示しますか？
         min = "0" + min
       }; //一桁の時はゼロをたす
       if (sec >= 60) {
@@ -101,6 +101,8 @@ function timer(){
       };  //一桁の時はゼロをたす
 
       //------------時間ごとに画像とメッセージを変更する-----------//
+      // 関数selectedTimeの関数実行結果によって得られる値は変化するので、念のため変数の方が良さそうです
+      // case内でも定数に対して乗算をしているので、変数の方が扱いやすいと思います
       const caseTime = selectedTime();
       //変数にユーザーから選択された数字(5 or 10 or 15)をいれる
 
@@ -136,6 +138,8 @@ function timer(){
 
 //--------------------------4. 画像とメッセージをランダムに変更する-----------------------//
 
+// 無名関数宣言で宣言していると、呼び出し → 宣言 の順で書いてある場合、シンタックスエラーが返ります。
+// 基本的には、宣言 → 呼び出し の順になるように、どの宣言形式であっても、統一しておくと、可読性が上がります
 function changeImage(){ //数分ごとにimageを変える
   const randomNum = _.random(1, 4); //1から4をランダムに表示
   img.src = `src/photo/photo-${randomNum}.jpg`
