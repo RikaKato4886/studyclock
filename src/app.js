@@ -20,7 +20,7 @@ const minSetting = document.getElementById('minsetting-container')
 
 function selectedTime(){ //選択してもらう
   const input = document.getElementById('selectMin').value //ユーザーの指定番号5 or 10 or 15
-  return input*5; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
+  return input * 60; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
 }
 
 function showTimer(){ //選択した後、タイマーを表示して選択肢を消す
@@ -82,7 +82,7 @@ let sec;
 
 function timer(){
     // ステータスが動作中の場合のみ実行
-  if (status == 1) {// 基本、厳密等価演算子が良いです。等価演算子は値の型まで見ないので挙動が起こりやすいです
+  if (status === 1) {// 基本、厳密等価演算子が良いです。等価演算子は値の型まで見ないので挙動が起こりやすいです
     setTimeout(() => {
       time++;
       console.log(time)
@@ -90,20 +90,20 @@ function timer(){
       min = Math.floor(time/60);
       sec = Math.floor(time);
 
-      if (min < 10) {// この10はどういう意味を示しますか？
+      if (min < 10) {// この10はどういう意味を示しますか？-->一桁の時は前にゼロをつける
         min = "0" + min
-      }; //一桁の時はゼロをたす
-      if (sec >= 60) {
+      };
+      if (sec >= 60) {//sec60以上になったら0から始める
         sec = sec % 60
-      }; //60
-      if (sec < 10) {
+      };
+      if (sec < 10) {//一桁の時はゼロをつける
         sec = "0" + sec
-      };  //一桁の時はゼロをたす
+      };
 
       //------------時間ごとに画像とメッセージを変更する-----------//
       // 関数selectedTimeの関数実行結果によって得られる値は変化するので、念のため変数の方が良さそうです
       // case内でも定数に対して乗算をしているので、変数の方が扱いやすいと思います
-      const caseTime = selectedTime();
+      let caseTime = selectedTime();
       //変数にユーザーから選択された数字(5 or 10 or 15)をいれる
 
       switch (time) {
@@ -137,7 +137,6 @@ function timer(){
 }
 
 //--------------------------4. 画像とメッセージをランダムに変更する-----------------------//
-
 // 無名関数宣言で宣言していると、呼び出し → 宣言 の順で書いてある場合、シンタックスエラーが返ります。
 // 基本的には、宣言 → 呼び出し の順になるように、どの宣言形式であっても、統一しておくと、可読性が上がります
 function changeImage(){ //数分ごとにimageを変える
