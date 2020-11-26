@@ -35,12 +35,12 @@ selectTimeBtn.addEventListener('click', showTimer);
 //---------------1. Show CurrentTime 現在時刻の表示-----------------//
 
 function currentTime() {
-  //moment.jsを使いたい 現在時刻の表示
   setInterval(() => {
     let time = moment().format('h:mm:ss a');
     document.getElementById('currentTime').innerHTML = time;
   }, 1000)
 }
+
 currentTime();
 
 //----------2. Controll Button コントロールボタンの設定------------//
