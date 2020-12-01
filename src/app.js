@@ -20,7 +20,7 @@ const minSetting = document.getElementById('minsetting-container')
 
 function selectedTime(){ //選択してもらう
   const input = document.getElementById('selectMin').value //ユーザーの指定番号5 or 10 or 15
-  return input*5; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
+  return input * 60; //選択してもらった[分]を秒に変更する-->5min * 60sec = 300sec
 }
 
 function showTimer(){ //選択した後、タイマーを表示して選択肢を消す
