@@ -2,18 +2,20 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  mode: "development",
   entry: './src/app.js',
   output: {
     filename: './bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {// ①
+    publicPath: '/dist/bundle.js',
     hot: true,
     hotOnly: true,
     watchContentBase: true,
     watchOptions: {
       ignored: /node_modules/
-    }
+    },
   },
   plugins: [ // ②
     new webpack.HotModuleReplacementPlugin()
