@@ -9,7 +9,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {// ①
-    publicPath: '/dist/bundle.js',
     hot: true,
     hotOnly: true,
     watchContentBase: true,
